@@ -12,7 +12,26 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        UdacityClient.client.login(username: "marcos.harbs@gmail.com", password: "mharbs88") { error in
+            if let error = error as NSError? {
+                let alertController = UIAlertController(title: "Error", message:
+                    error.userInfo["message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
+            print(UdacityClient.client.sessionId!)
+            print(UdacityClient.client.accountKey!)
+            print(UdacityClient.client.firstName!)
+            print(UdacityClient.client.lastName!)
+            
+            /*ParseUdacityClient.client.getLoggedStudentLocation(completionHandler: { student, error in
+                print(student!)
+            })*/
+        }
+        /*ParseUdacityClient.client.getStudentsLocations { studentsLocations, error in
+            print(studentsLocations!)
+        }*/
     }
 
     override func didReceiveMemoryWarning() {
