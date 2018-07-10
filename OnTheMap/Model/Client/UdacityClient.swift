@@ -68,7 +68,9 @@ class UdacityClient {
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             if error != nil {
-                completionHandler(error)
+                DispatchQueue.main.async {
+                    completionHandler(error)
+                }
                 return
             }
             let range = Range(5..<data!.count)
@@ -78,12 +80,16 @@ class UdacityClient {
             do {
                 parsedResult = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as AnyObject
             } catch {
-                completionHandler(NSError(domain: "login", code: 1, userInfo: nil))
+                DispatchQueue.main.async {
+                    completionHandler(NSError(domain: "login", code: 1, userInfo: nil))
+                }
                 return
             }
             
             if let responseError = parsedResult["error"], responseError != nil  {
-                completionHandler(NSError(domain: "login", code: 2, userInfo: ["message": responseError!]))
+                DispatchQueue.main.async {
+                    completionHandler(NSError(domain: "login", code: 2, userInfo: [NSLocalizedDescriptionKey: responseError!]))
+                }
                 return
             }
             
@@ -98,7 +104,9 @@ class UdacityClient {
             }
             
             self.getUserInfos(userId: self.accountKey!, completionHandler: { error in
-                completionHandler(error)
+                DispatchQueue.main.async {
+                    completionHandler(error)
+                }
             })
         }
         task.resume()
