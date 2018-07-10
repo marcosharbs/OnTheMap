@@ -20,18 +20,14 @@ class LoginVC: UIViewController {
                 self.showError(error! as NSError)
                 return
             }
-            print("login validado")
+            
+            let locationsTabBar = self.storyboard!.instantiateViewController(withIdentifier: "LocationsTabBar") as! UITabBarController
+            self.present(locationsTabBar, animated: true, completion: nil)
         }
     }
     
     @IBAction func onSignUp(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://www.udacity.com/account/auth#!/signup")!, options: [:], completionHandler: nil)
-    }
-    
-    func showError(_ error: NSError) {
-        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-        self.present(alertController, animated: true, completion: nil)
     }
     
 }

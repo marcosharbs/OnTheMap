@@ -112,7 +112,9 @@ class ParseUdacityClient {
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             if error != nil {
-                completionHandler(nil, error)
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
                 return
             }
             
@@ -120,7 +122,9 @@ class ParseUdacityClient {
             do {
                 parsedResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as AnyObject
             } catch {
-                completionHandler(nil, NSError(domain: "getStudentsLocations", code: 1, userInfo: nil))
+                DispatchQueue.main.async {
+                    completionHandler(nil, NSError(domain: "getStudentsLocations", code: 1, userInfo: nil))
+                }
             }
             
             if let results = parsedResult[ResponseKeys.Results] as? [[String:AnyObject]] {
@@ -128,9 +132,13 @@ class ParseUdacityClient {
                 for result in results {
                     studentesLocations.append(StudentLocation(dictionary: result))
                 }
-                completionHandler(studentesLocations, nil)
+                DispatchQueue.main.async {
+                    completionHandler(studentesLocations, nil)
+                }
             } else {
-                completionHandler(nil, NSError(domain: "getStudentsLocations", code: 2, userInfo: nil))
+                DispatchQueue.main.async {
+                    completionHandler(nil, NSError(domain: "getStudentsLocations", code: 2, userInfo: nil))
+                }
             }
         }
         task.resume()
