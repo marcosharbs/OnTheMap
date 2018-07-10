@@ -18,9 +18,9 @@ class LoginVC: UIViewController {
         UdacityClient.client.login(username: emailField.text!, password: passwordField.text!) { error in
             guard error == nil else {
                 self.showError(error! as NSError)
-                return;
+                return
             }
-            print("login validado");
+            print("login validado")
         }
     }
     
