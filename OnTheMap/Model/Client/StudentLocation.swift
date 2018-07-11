@@ -16,8 +16,8 @@ struct StudentLocation {
     var lastName: String?
     var mapString: String?
     var mediaURL: String?
-    var latitude: Float?
-    var longitude: Float?
+    var latitude: Double?
+    var longitude: Double?
     
     init(dictionary: [String:AnyObject]) {
         self.objectId = dictionary[ParseUdacityClient.BodyKeys.ObjectId] as? String
@@ -26,8 +26,8 @@ struct StudentLocation {
         self.lastName = dictionary[ParseUdacityClient.BodyKeys.LastName] as? String
         self.mapString = dictionary[ParseUdacityClient.BodyKeys.MapString] as? String
         self.mediaURL = dictionary[ParseUdacityClient.BodyKeys.MediaURL] as? String
-        self.latitude = (dictionary[ParseUdacityClient.BodyKeys.ObjectId] as? NSString)?.floatValue
-        self.longitude = (dictionary[ParseUdacityClient.BodyKeys.ObjectId] as? NSString)?.floatValue
+        self.latitude = dictionary[ParseUdacityClient.BodyKeys.Latitude] as? Double
+        self.longitude = dictionary[ParseUdacityClient.BodyKeys.Longitude] as? Double
     }
     
     init(){}

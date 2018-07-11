@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		350753E720F6A9CA00B2B222 /* LocationsMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350753E620F6A9CA00B2B222 /* LocationsMapVC.swift */; };
 		35BD805620F17F9300BDA5B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD805520F17F9300BDA5B0 /* AppDelegate.swift */; };
 		35BD805820F17F9300BDA5B0 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD805720F17F9300BDA5B0 /* LoginVC.swift */; };
 		35BD805B20F17F9300BDA5B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35BD805920F17F9300BDA5B0 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		350753E620F6A9CA00B2B222 /* LocationsMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsMapVC.swift; sourceTree = "<group>"; };
 		35BD805220F17F9300BDA5B0 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35BD805520F17F9300BDA5B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35BD805720F17F9300BDA5B0 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				35F7437C20F54F4100E9063B /* ErrorHelper.swift */,
 				35F7437E20F5562D00E9063B /* LocationsTabBar.swift */,
 				35F7438020F55B1400E9063B /* LocationsTBC.swift */,
+				350753E620F6A9CA00B2B222 /* LocationsMapVC.swift */,
 			);
 			path = OnTheMap;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				35BD805820F17F9300BDA5B0 /* LoginVC.swift in Sources */,
 				35F7437F20F5562D00E9063B /* LocationsTabBar.swift in Sources */,
 				35F7438120F55B1400E9063B /* LocationsTBC.swift in Sources */,
+				350753E720F6A9CA00B2B222 /* LocationsMapVC.swift in Sources */,
 				35BD805620F17F9300BDA5B0 /* AppDelegate.swift in Sources */,
 				35BD806A20F1835200BDA5B0 /* UdacityConstants.swift in Sources */,
 				35BD807220F19D6000BDA5B0 /* StudentLocation.swift in Sources */,

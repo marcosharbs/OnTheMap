@@ -101,21 +101,38 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="32.833583208395808"/>
         </scene>
-        <!--View Controller-->
+        <!--Locations MapVC-->
         <scene sceneID="W9f-Lt-ZEC">
             <objects>
-                <viewController id="xNG-RM-2Bh" sceneMemberID="viewController">
+                <viewController id="xNG-RM-2Bh" customClass="LocationsMapVC" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Ja-NN-tbN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jQ3-n7-6S1">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <connections>
+                                    <outlet property="delegate" destination="xNG-RM-2Bh" id="TLU-Mk-hWf"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jQ3-n7-6S1" firstAttribute="top" secondItem="yOv-Oz-nVP" secondAttribute="top" id="0uy-jj-6Le"/>
+                            <constraint firstItem="yOv-Oz-nVP" firstAttribute="trailing" secondItem="jQ3-n7-6S1" secondAttribute="trailing" id="Mlg-Ng-LrQ"/>
+                            <constraint firstItem="yOv-Oz-nVP" firstAttribute="bottom" secondItem="jQ3-n7-6S1" secondAttribute="bottom" id="OR4-bl-BO6"/>
+                            <constraint firstItem="jQ3-n7-6S1" firstAttribute="leading" secondItem="yOv-Oz-nVP" secondAttribute="leading" id="TdX-TJ-GB7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="yOv-Oz-nVP"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-selected" id="c9s-gY-26H"/>
+                    <connections>
+                        <outlet property="mapView" destination="jQ3-n7-6S1" id="dzT-gd-j5K"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="972-0Y-BJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2159" y="-434"/>
+            <point key="canvasLocation" x="2157.5999999999999" y="-434.03298350824593"/>
         </scene>
         <!--LocationsTBC-->
         <scene sceneID="KIs-zm-d4L">

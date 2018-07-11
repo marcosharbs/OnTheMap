@@ -19,7 +19,7 @@ class LocationsTBC: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        allLocations = appDelegate.studentsLocations
+        self.allLocations = appDelegate.studentsLocations
         self.tableView.reloadData()
     }
     
