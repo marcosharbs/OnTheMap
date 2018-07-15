@@ -14,6 +14,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var studentsLocations = [StudentLocation]()
+    
+    var dataLoadedProtocols = [OnDataLoadProtocol]()
+    
+    func addDataLoadedProtocol(loadProtocol: OnDataLoadProtocol) {
+        self.dataLoadedProtocols.append(loadProtocol);
+    }
+    
+    func setStudentesLocations(studentsLocations: [StudentLocation]) {
+        self.studentsLocations = studentsLocations
+        
+        for loadProtocol in self.dataLoadedProtocols {
+            loadProtocol.onDataLoaded(studentsLocations: self.studentsLocations)
+        }
+    }
 
 }
 
+protocol OnDataLoadProtocol {
+    
+    func onDataLoaded(studentsLocations: [StudentLocation])
+    
+}

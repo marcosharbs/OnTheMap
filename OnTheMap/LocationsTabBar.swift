@@ -10,11 +10,11 @@ import UIKit
 
 class LocationsTabBar: UITabBarController {
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         self.loadStudentsLocations()
     }
-    
+
     func loadStudentsLocations() {
         ParseUdacityClient.client.getStudentsLocations { studentsLocations, error in
             guard error == nil else {
@@ -23,7 +23,7 @@ class LocationsTabBar: UITabBarController {
             }
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.studentsLocations = studentsLocations!
+            appDelegate.setStudentesLocations(studentsLocations: studentsLocations!)
         }
     }
     

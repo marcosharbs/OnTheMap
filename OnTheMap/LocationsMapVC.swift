@@ -9,20 +9,34 @@
 import UIKit
 import MapKit
 
-class LocationsMapVC: UIViewController, MKMapViewDelegate {
+class LocationsMapVC: UIViewController, MKMapViewDelegate, OnDataLoadProtocol {
     
     @IBOutlet weak var mapView: MKMapView!
     
     var allLocations: [StudentLocation]!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.addDataLoadedProtocol(loadProtocol: self)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.allLocations = appDelegate.studentsLocations
         self.drawLocationsOnMap()
     }
     
+    func onDataLoaded(studentsLocations: [StudentLocation]) {
+        self.allLocations = studentsLocations
+        self.drawLocationsOnMap()
+    }
+    
     func drawLocationsOnMap() {
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        
         if let locations = self.allLocations {
             var annotations = [MKPointAnnotation]()
             

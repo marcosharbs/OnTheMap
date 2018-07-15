@@ -112,4 +112,41 @@ class UdacityClient {
         task.resume()
     }
     
+    func logout(completionHandler: @escaping (_ error: Error?) -> Void) {
+        var components = URLComponents()
+        components.scheme = Constants.ApiScheme
+        components.host = Constants.ApiHost
+        components.path = Constants.ApiPath + Methods.Login
+        
+        let request = NSMutableURLRequest(url: components.url!)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            if error != nil {
+                DispatchQueue.main.async {
+                    completionHandler(error)
+                }
+                return
+            }
+            
+            self.sessionId = ""
+            self.accountKey = ""
+            self.firstName = ""
+            self.lastName = ""
+            
+            DispatchQueue.main.async {
+                completionHandler(nil)
+            }
+        }
+        task.resume()
+    }
+    
 }

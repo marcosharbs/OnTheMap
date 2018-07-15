@@ -15,46 +15,28 @@ class ParseUdacityClient {
     
     var session = URLSession.shared
     
-    func changeStudentLocation(student: StudentLocation, completionHandler: @escaping (_ error: Error?) -> Void) {
+    func postStudentLocation(student: StudentLocation, overwrite: Bool, completionHandler: @escaping (_ error: Error?) -> Void) {
         var components = URLComponents()
         components.scheme = Constants.ApiScheme
         components.host = Constants.ApiHost
-        components.path = Constants.ApiPath
-        
+        components.path = overwrite ? Constants.ApiPath + "/\(student.objectId!)" : Constants.ApiPath
+ 
         let request = NSMutableURLRequest(url: components.url!)
-        request.httpMethod = "PUT"
+        request.httpMethod = overwrite ? "PUT" : "POST"
         request.addValue(Constants.ApplicationId, forHTTPHeaderField: HeaderKeys.PaserApplicationId)
         request.addValue(Constants.ApiKey, forHTTPHeaderField: HeaderKeys.ParserRestKey)
         request.addValue(Constants.ApplicationJson, forHTTPHeaderField: HeaderKeys.ContentType)
         request.httpBody = "{\"uniqueKey\": \"\(student.uniqueKey!)\", \"firstName\": \"\(student.firstName!)\", \"lastName\": \"\(student.lastName!)\",\"mapString\": \"\(student.mapString!)\", \"mediaURL\": \"\(student.mediaURL!)\",\"latitude\": \(student.latitude!), \"longitude\": \(student.longitude!)}".data(using: String.Encoding.utf8)
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             if error != nil {
-                completionHandler(error)
+                DispatchQueue.main.async {
+                    completionHandler(error)
+                }
                 return
             }
-            completionHandler(nil)
-        }
-        task.resume()
-    }
-    
-    func postStudentLocation(student: StudentLocation, completionHandler: @escaping (_ error: Error?) -> Void) {
-        var components = URLComponents()
-        components.scheme = Constants.ApiScheme
-        components.host = Constants.ApiHost
-        components.path = Constants.ApiPath
-        
-        let request = NSMutableURLRequest(url: components.url!)
-        request.httpMethod = "POST"
-        request.addValue(Constants.ApplicationId, forHTTPHeaderField: HeaderKeys.PaserApplicationId)
-        request.addValue(Constants.ApiKey, forHTTPHeaderField: HeaderKeys.ParserRestKey)
-        request.addValue(Constants.ApplicationJson, forHTTPHeaderField: HeaderKeys.ContentType)
-        request.httpBody = "{\"uniqueKey\": \"\(student.uniqueKey!)\", \"firstName\": \"\(student.firstName!)\", \"lastName\": \"\(student.lastName!)\",\"mapString\": \"\(student.mapString!)\", \"mediaURL\": \"\(student.mediaURL!)\",\"latitude\": \(student.latitude!), \"longitude\": \(student.longitude!)}".data(using: String.Encoding.utf8)
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            if error != nil {
-                completionHandler(error)
-                return
+            DispatchQueue.main.async {
+                completionHandler(nil)
             }
-            completionHandler(nil)
         }
         task.resume()
     }
@@ -72,7 +54,9 @@ class ParseUdacityClient {
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             if error != nil {
-                completionHandler(nil, error)
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
                 return
             }
             
@@ -80,7 +64,9 @@ class ParseUdacityClient {
             do {
                 parsedResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as AnyObject
             } catch {
-                completionHandler(nil, NSError(domain: "getStudentsLocations", code: 1, userInfo: nil))
+                DispatchQueue.main.async {
+                    completionHandler(nil, NSError(domain: "getStudentsLocations", code: 1, userInfo: nil))
+                }
             }
             
             if let results = parsedResult[ResponseKeys.Results] as? [[String:AnyObject]] {
@@ -89,12 +75,18 @@ class ParseUdacityClient {
                     studentesLocations.append(StudentLocation(dictionary: result))
                 }
                 if(studentesLocations.count > 0) {
-                    completionHandler(studentesLocations[0], nil)
+                    DispatchQueue.main.async {
+                        completionHandler(studentesLocations[0], nil)
+                    }
                 } else {
-                    completionHandler(StudentLocation(), nil)
+                    DispatchQueue.main.async {
+                        completionHandler(StudentLocation(), nil)
+                    }
                 }
             } else {
-                completionHandler(nil, NSError(domain: "getStudentsLocations", code: 2, userInfo: nil))
+                DispatchQueue.main.async {
+                    completionHandler(nil, NSError(domain: "getStudentsLocations", code: 2, userInfo: nil))
+                }
             }
         }
         task.resume()
@@ -105,6 +97,7 @@ class ParseUdacityClient {
         components.scheme = Constants.ApiScheme
         components.host = Constants.ApiHost
         components.path = Constants.ApiPath
+        components.queryItems = [URLQueryItem(name: "order", value: "-updatedAt"), URLQueryItem(name: "limit", value: "500")]
         
         let request = NSMutableURLRequest(url: components.url!)
         request.addValue(Constants.ApplicationId, forHTTPHeaderField: HeaderKeys.PaserApplicationId)
