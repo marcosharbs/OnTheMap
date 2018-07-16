@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		350753E720F6A9CA00B2B222 /* LocationsMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350753E620F6A9CA00B2B222 /* LocationsMapVC.swift */; };
+		350771C520FCC3250041E48D /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350771C420FCC3250041E48D /* SharedData.swift */; };
 		35BA8E5820FBBA420069E381 /* AddLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BA8E5720FBBA420069E381 /* AddLocationVC.swift */; };
 		35BD805620F17F9300BDA5B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD805520F17F9300BDA5B0 /* AppDelegate.swift */; };
 		35BD805820F17F9300BDA5B0 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD805720F17F9300BDA5B0 /* LoginVC.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		350753E620F6A9CA00B2B222 /* LocationsMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsMapVC.swift; sourceTree = "<group>"; };
+		350771C420FCC3250041E48D /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		35BA8E5720FBBA420069E381 /* AddLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationVC.swift; sourceTree = "<group>"; };
 		35BD805220F17F9300BDA5B0 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35BD805520F17F9300BDA5B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				35CAE76D20FAAFF200B5EE5E /* LocationsNC.swift */,
 				35CAE76F20FAD76C00B5EE5E /* FindLocationVC.swift */,
 				35BA8E5720FBBA420069E381 /* AddLocationVC.swift */,
+				350771C420FCC3250041E48D /* SharedData.swift */,
 			);
 			path = OnTheMap;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				35CAE77020FAD76C00B5EE5E /* FindLocationVC.swift in Sources */,
 				35BD806E20F19B6100BDA5B0 /* ParseUdacityClient.swift in Sources */,
 				35BD806C20F1839600BDA5B0 /* UdacityClient.swift in Sources */,
+				350771C520FCC3250041E48D /* SharedData.swift in Sources */,
 				35BD805820F17F9300BDA5B0 /* LoginVC.swift in Sources */,
 				35F7437F20F5562D00E9063B /* LocationsTabBar.swift in Sources */,
 				35BA8E5820FBBA420069E381 /* AddLocationVC.swift in Sources */,

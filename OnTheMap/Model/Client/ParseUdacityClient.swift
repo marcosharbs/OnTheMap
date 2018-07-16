@@ -97,7 +97,7 @@ class ParseUdacityClient {
         components.scheme = Constants.ApiScheme
         components.host = Constants.ApiHost
         components.path = Constants.ApiPath
-        components.queryItems = [URLQueryItem(name: "order", value: "-updatedAt"), URLQueryItem(name: "limit", value: "500")]
+        components.queryItems = [URLQueryItem(name: "order", value: "-updatedAt"), URLQueryItem(name: "limit", value: "100")]
         
         let request = NSMutableURLRequest(url: components.url!)
         request.addValue(Constants.ApplicationId, forHTTPHeaderField: HeaderKeys.PaserApplicationId)

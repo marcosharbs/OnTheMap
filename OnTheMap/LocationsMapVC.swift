@@ -17,15 +17,13 @@ class LocationsMapVC: UIViewController, MKMapViewDelegate, OnDataLoadProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.addDataLoadedProtocol(loadProtocol: self)
+        SharedData.shared.addDataLoadedProtocol(loadProtocol: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.allLocations = appDelegate.studentsLocations
+        self.allLocations = SharedData.shared.studentsLocations
         self.drawLocationsOnMap()
     }
     

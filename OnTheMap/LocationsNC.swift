@@ -26,8 +26,7 @@ class LocationsNC: UINavigationController {
                 return
             }
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.studentsLocations.removeAll()
+            SharedData.shared.studentsLocations.removeAll()
             
             self.dismiss(animated: false, completion: nil)
         }
@@ -40,8 +39,7 @@ class LocationsNC: UINavigationController {
                 return
             }
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.setStudentesLocations(studentsLocations: studentsLocations!)
+            SharedData.shared.setStudentesLocations(studentsLocations: studentsLocations!)
         }
     }
     

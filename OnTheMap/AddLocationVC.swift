@@ -27,7 +27,11 @@ class AddLocationVC: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func onFinish(_ sender: Any) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         ParseUdacityClient.client.postStudentLocation(student: self.studentLocation, overwrite: self.overwrite) { error in
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
             guard error == nil else {
                 self.showError(error! as NSError)
                 return
@@ -39,8 +43,7 @@ class AddLocationVC: UIViewController, MKMapViewDelegate {
                     return
                 }
                 
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.setStudentesLocations(studentsLocations: studentsLocations!)
+                SharedData.shared.setStudentesLocations(studentsLocations: studentsLocations!)
                 
                 self.navigationController?.popToRootViewController(animated: true)
             }
@@ -58,6 +61,12 @@ class AddLocationVC: UIViewController, MKMapViewDelegate {
         annotation.title = self.studentLocation.mapString ?? ""
         
         self.mapView.addAnnotations([annotation])
+        
+        let latDelta: CLLocationDegrees = 0.05
+        let lonDelta: CLLocationDegrees = 0.05
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
+        let region: MKCoordinateRegion = MKCoordinateRegionMake(coordinate, span)
+        self.mapView.setRegion(region, animated: false)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

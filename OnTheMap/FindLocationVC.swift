@@ -24,8 +24,12 @@ class FindLocationVC: UIViewController {
     }
     
     @IBAction func onFindLocation(_ sender: Any) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(self.addressText.text!) { (placemarks, error) in
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
             guard
                 let placemarks = placemarks,
                 let location = placemarks.first?.location
